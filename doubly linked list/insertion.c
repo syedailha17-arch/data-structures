@@ -51,7 +51,7 @@ void printlist(struct node *head){
   while(ptr!=NULL){
     printf("%d",ptr->data);
     ptr=ptr->next;
-    printf("\n");}}
+    printf("\n");}}g
 
 int main() {
   struct node *head=malloc(sizeof(struct node));
