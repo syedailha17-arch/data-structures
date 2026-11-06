@@ -35,6 +35,21 @@ void selection(int arr[],int n){
         }
     }
 }
+/*INSERTION SORT */
+int insertion(int arr[],int n){
+    int total=0;
+    for(int i=1;i<n;i++){
+        int key=arr[i];
+        int j=i-1;
+        while(j>=0 && arr[j]>key){
+            arr[j+1]=arr[j];
+            j--;
+            total++;
+        }
+        arr[j+1]=key;
+    }
+    return total;
+}
 void printArray(int arr[],int n){
     for(int i=0;i<n;i++){
         printf("%d ",arr[i]);
@@ -47,19 +62,25 @@ int main(){
     scanf("%d",&n);
     int arr[n];
     int brr[n];
+    int crr[n];
     printf("enter each element");
     for(int i=0;i<n;i++){
         scanf("%d",&arr[i]);
-        brr[i]=arr[i];
+        crr[i]=brr[i]=arr[i];
     }
-    printf("array before sorting:");
+    printf("array before sorting: ");
     printArray(arr,n);
     int x=bubblesort(arr,n);
-    printf("array after sorting");
-    printf("no. of swaps:%d\n",x);
+    printf("array after sorting: ");
+    printf("no. of swaps: %d\n",x);
     printArray(arr,n);
     selection(brr,n);
-    printf("after selection sort:");
+    printf("after selection sort: ");
     printArray(brr,n);
+    int y=insertion(crr,n);
+    printf("after insertion sort: ");
+    printArray(crr,n);
+    printf("no of swaps: %d",y);
+
     return 0;
 }
