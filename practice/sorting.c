@@ -29,7 +29,6 @@ void selection(int arr[],int n){
         for(int j=i+1;j<n;j++){
             if(arr[j]<arr[minIdx]){
                 minIdx=j;
-
             }
             }
         if(minIdx!=i){
@@ -87,6 +86,50 @@ void quick(int arr[],int low,int high){
     }}
 
 
+/*MERGE SORT */
+void merge(int arr[],int lb,int mid,int ub){
+    int i=lb;
+    int j=mid+1;
+    int k=lb;
+    int b[ub+1];
+    while(i<=mid&& j<=ub){
+        if(arr[i]<=arr[j]){
+            b[k]=arr[i];
+            i++;
+        }
+        else{
+            b[k]=arr[j];
+            j++;
+        }
+        k++;
+    }
+    if(i>mid){
+        while(j<=ub){
+            b[k]=arr[j];
+            j++;
+            k++;
+        }
+    }
+    else{
+        while(i<=mid){
+              b[k]=arr[i];
+              i++;
+              k++;
+        }      
+    }
+     for(int i = lb; i <=ub; i++) {
+        arr[i] = b[i];
+    }
+}
+void mergesort(int arr[],int lb, int ub){
+    if(lb<ub){
+        int mid=(lb+ub)/2;
+        mergesort(arr,lb,mid);
+        mergesort(arr,mid+1,ub);
+        merge(arr,lb,mid,ub);        
+    }
+}
+
 void printArray(int arr[],int n){
     for(int i=0;i<n;i++){
         printf("%d ",arr[i]);
@@ -101,10 +144,11 @@ int main(){
     int brr[n];
     int crr[n];
     int drr[n];
+    int err[n];
     printf("enter each element");
     for(int i=0;i<n;i++){
         scanf("%d",&arr[i]);
-        drr[i]=crr[i]=brr[i]=arr[i];
+        err[i]=drr[i]=crr[i]=brr[i]=arr[i];
     }
     printf("array before sorting: ");
     printArray(arr,n);
@@ -122,6 +166,9 @@ int main(){
     quick(drr,0,n-1);
     printf("Array after quick sort:\n ");
     printArray(drr,n);
+    mergesort(err,0,n-1);
+    printf("Array after merge sort:\n");
+    printArray(err,n);
 
     return 0;
 }
