@@ -1,4 +1,6 @@
 #include<stdio.h>
+
+
 /*BUBBLE SORT*/
 int bubblesort(int arr[],int n){
     int temp;
@@ -18,6 +20,8 @@ int bubblesort(int arr[],int n){
     }
     return total;
 }
+
+
 /*SELECTION SORT*/
 void selection(int arr[],int n){
     for(int i=0;i<n-1;i++){
@@ -35,6 +39,8 @@ void selection(int arr[],int n){
         }
     }
 }
+
+
 /*INSERTION SORT */
 int insertion(int arr[],int n){
     int total=0;
@@ -50,6 +56,37 @@ int insertion(int arr[],int n){
     }
     return total;
 }
+
+/*QUICK SORT */
+void swap(int *a,int *b){
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
+int partition(int arr[],int low,int high){
+    int piv=arr[low];
+    int L=low+1;
+    int R=high;
+    while(L<=R){
+        while(L<=high && arr[L]<piv)L++;
+        while(R>low && arr[R]>piv)R--;
+        if(L<=R){
+            swap(&arr[L],&arr[R]);
+            L++;
+            R--;
+        }
+    }
+    swap(&arr[low],&arr[R]);
+    return R;
+}
+void quick(int arr[],int low,int high){
+    if(low<high){
+        int x=partition(arr,low,high);
+        quick(arr,low,x-1);
+        quick(arr,x+1,high);
+    }}
+
+
 void printArray(int arr[],int n){
     for(int i=0;i<n;i++){
         printf("%d ",arr[i]);
@@ -63,10 +100,11 @@ int main(){
     int arr[n];
     int brr[n];
     int crr[n];
+    int drr[n];
     printf("enter each element");
     for(int i=0;i<n;i++){
         scanf("%d",&arr[i]);
-        crr[i]=brr[i]=arr[i];
+        drr[i]=crr[i]=brr[i]=arr[i];
     }
     printf("array before sorting: ");
     printArray(arr,n);
@@ -81,6 +119,9 @@ int main(){
     printf("after insertion sort: ");
     printArray(crr,n);
     printf("no of swaps: %d",y);
+    quick(drr,0,n-1);
+    printf("Array after quick sort:\n ");
+    printArray(drr,n);
 
     return 0;
 }
